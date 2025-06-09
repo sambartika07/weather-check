@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App 🌤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background-image: url(https://th.bing.com/th/id/R.dc0df13363955c167433df0bafc31234?rik=iUAd%2b4zozTAmSA&riu=http%3a%2f%2fimage.shutterstock.com%2fz%2fstock-vector-the-weather-card-for-children-440302270.jpg&ehk=UnVJHXciGxTpSwflU6cnlWRaoK0xP6voRfrwJyhxImM%3d&risl=&pid=ImgRaw&r=0); /* <-- Your uploaded image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px 40px;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    input, button {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin: 10px 0;
+      width: 80%;
+    }
+
+    button {
+      background: #00bfff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .weather-info img {
+      width: 80px;
+    }
+
+    .temp {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .desc {
+      text-transform: capitalize;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🌦️ Weather App</h2>
+    <input type="text" id="city" placeholder="Enter city name">
+    <br>
+    <button onclick="getWeather()">Check Weather</button>
+
+    <div id="result" class="weather-info"></div>
+  </div>
+
+  <script>
+    const apiKey = "f51dafd442bf3d0ad0fb101d06fd04cc"; 
+
+    function getWeather() {
+      const city = document.getElementById("city").value.trim();
+      if (!city) return alert("Please enter a city name!");
+
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error("City not found");
+          return response.json();
+        })
+        .then(data => {
+          const { name, sys, main, weather, wind } = data;
+          const icon = weather[0].icon;
+          const desc = weather[0].description;
+
+          document.getElementById("result").innerHTML = `
+            <h3>${name}, ${sys.country}</h3>
+            <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${desc}">
+            <p class="temp">${main.temp}°C</p>
+            <p class="desc">${desc}</p>
+            <p>Humidity: ${main.humidity}%</p>
+            <p>Wind: ${wind.speed} m/s</p>
+          `;
+        })
+        .catch(err => {
+          document.getElementById("result").innerHTML = `<p style="color:red;">❌ ${err.message}</p>`;
+        });
+    }
+  </script>
+
+</body>
+</html>
