@@ -2,6 +2,7 @@
 
 A clean and user-friendly Weather Web Application built with HTML, CSS, and JavaScript, allowing users to get real-time weather updates based on their current location or any city input.
 
+
 🔍 Features
 
 📍 Get weather using your current location (Geolocation)
@@ -14,7 +15,9 @@ A clean and user-friendly Weather Web Application built with HTML, CSS, and Java
 
 📱 Responsive on mobile and desktop
 
+
 🛠️ Built With
+
 HTML for structure
 
 CSS for styling and responsive layout
