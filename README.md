@@ -1,4 +1,5 @@
 🌦️ Weather Web App
+
 A clean and user-friendly Weather Web Application built with HTML, CSS, and JavaScript, allowing users to get real-time weather updates based on their current location or any city input.
 
 🔍 Features
